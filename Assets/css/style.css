@@ -1,0 +1,27 @@
+.headerClass
+{
+    display: flex;
+    justify-content: center;
+    background-color: blue;
+    padding: 10px 0px 10px 0px;
+    color: wheat;
+    font-size: 2.5em;
+    font-family: fantasy;
+}
+
+.btn-outline-success
+{
+    margin-top: 5px;
+    width: 150px;
+}
+
+.searchClass
+{
+    height: 400px;
+    
+}
+
+.col-4
+{
+    background-color: lightblue;
+}
