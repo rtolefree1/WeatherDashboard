@@ -76,7 +76,7 @@ function getAPI(event){
         .then(function(data){
             //var weatherValue = data.main.temp;
             console.log("Tempature: "+data.main.temp);
-            cityTemperature = data.main.temp;
+            cityTemperature = "City: " + data.main.temp;
             console.log("TempInfo",cityTemperature);
             cityWind = data.wind.speed;
             cityHumidity = data.main.humidity;
@@ -95,14 +95,14 @@ function displaySearchInfo(event)
     //console.log("tempature",tempature);
     //var parCityInfo = document.createElement('p');
     //parCityInfo.textContent = cityValueFromButtonClick;
-    searchCityEl.append(cityValueFromButtonClick);
+    searchCityEl.append( "City: " + cityValueFromButtonClick);
 
     //var parTempInfo = document.createElement('p');
    // parTempInfo.textContent = cityTemperature;
     //console.log("TempInfo2",parTempInfo.textContent);
-    searchCityTempEl.append(cityTemperature);
-    searchCityWindEl.append(cityWind);
-    searchCityHumidityEl.append(cityHumidity);
+    searchCityTempEl.append("Temperature: " + cityTemperature);
+    searchCityWindEl.append("Wind Speed: " + cityWind);
+    searchCityHumidityEl.append("Humidity: " + cityHumidity);
 }
 
 
