@@ -12,16 +12,37 @@
 .btn-outline-success
 {
     margin-top: 5px;
-    width: 150px;
+    width: 250px;
+}
+
+
+
+.mr-sm-2
+{
+    margin-top: 5px;
 }
 
 .searchClass
 {
-    height: 400px;
+    height: 700px;
     
 }
 
 .col-4
 {
     background-color: lightblue;
+}
+
+#searchList_API
+{
+    margin-top: 5px;
+}
+
+#searchList_API button
+{   
+    margin-top: 5px;
+    display: flex;
+    width: 200px;
+    background-color: lightgray;
+    
 }
