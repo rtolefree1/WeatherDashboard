@@ -14,6 +14,11 @@ let cityButton = '';
 let cityValueFromButtonClick = '';
 let requestURL = '';
 let cityTemperature = '';
+let cityWind = '';
+let cityHumidity = '';
+
+//run method to create buttons
+createCityButtons();
 
 // Dynamically creating buttons
 function createCityButtons()
@@ -27,7 +32,8 @@ function createCityButtons()
     }
 }
 
-searchListEl.addEventListener("click", function(event){
+//searchListEl.addEventListener("click", function(event){
+function getCity(event){
     event.preventDefault();
     console.log("button click");
     console.log(this);
@@ -37,10 +43,10 @@ searchListEl.addEventListener("click", function(event){
     // calling getAPI method to check for city
     getAPI(event);
     // displaySearchInfo(event);
-});
+};
 
+searchListEl.addEventListener("click", getCity);
 
-createCityButtons();
 
 function searchCity()
 {
@@ -72,6 +78,9 @@ function getAPI(event){
             console.log("Tempature: "+data.main.temp);
             cityTemperature = data.main.temp;
             console.log("TempInfo",cityTemperature);
+            cityWind = data.wind.speed;
+            cityHumidity = data.main.humidity;
+            displaySearchInfo(event);
 
         });
        
@@ -84,14 +93,16 @@ function displaySearchInfo(event)
 {
     //var tempature = 'http://api.openweathermap.org/data/2.5/weather?q='+`${cityValueFromButtonClick}`+'&APPID=4b5773176d3e07e22f05a4f149585fee&units=imperial';
     //console.log("tempature",tempature);
-    var parCityInfo = document.createElement('p');
-    parCityInfo.textContent = cityValueFromButtonClick;
-    searchCityEl.append(parCityInfo);
+    //var parCityInfo = document.createElement('p');
+    //parCityInfo.textContent = cityValueFromButtonClick;
+    searchCityEl.append(cityValueFromButtonClick);
 
-    var parTempInfo = document.createElement('p');
-    parTempInfo.textContent = cityTemperature;
-    console.log("TempInfo2",parTempInfo.textContent);
-    searchCityTempEl.append(parTempInfo);
+    //var parTempInfo = document.createElement('p');
+   // parTempInfo.textContent = cityTemperature;
+    //console.log("TempInfo2",parTempInfo.textContent);
+    searchCityTempEl.append(cityTemperature);
+    searchCityWindEl.append(cityWind);
+    searchCityHumidityEl.append(cityHumidity);
 }
 
 
