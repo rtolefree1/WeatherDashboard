@@ -13,9 +13,18 @@ arrOfCities = ['Atlanta', 'Denver', 'Seattle', 'San Francisco', 'Orlando', 'New 
 let cityButton = '';
 let cityValueFromButtonClick = '';
 let requestURL = '';
+let requestURL2 = '';
 let cityTemperature = '';
 let cityWind = '';
 let cityHumidity = '';
+
+let cityTemperature_5day = '';
+let cityWind_5day = '';
+let cityHumidity_5day = '';
+
+let longitude = '';
+let latitude = '';
+
 
 //run method to create buttons
 createCityButtons();
@@ -81,6 +90,7 @@ function getAPI(event){
             cityWind = data.wind.speed;
             cityHumidity = data.main.humidity;
             displaySearchInfo(event);
+            add_Attributes(event);
 
         });
        
@@ -89,20 +99,77 @@ function getAPI(event){
 
 searchButtonEl.addEventListener('click', getAPI);
 
+function add_Attributes(event)
+{
+    searchCityEl.setAttribute("style","font-size: 22px; font-weight: bold");
+}
+
 function displaySearchInfo(event)
 {
-    //var tempature = 'http://api.openweathermap.org/data/2.5/weather?q='+`${cityValueFromButtonClick}`+'&APPID=4b5773176d3e07e22f05a4f149585fee&units=imperial';
-    //console.log("tempature",tempature);
-    //var parCityInfo = document.createElement('p');
-    //parCityInfo.textContent = cityValueFromButtonClick;
-    searchCityEl.append( "City: " + cityValueFromButtonClick);
-
-    //var parTempInfo = document.createElement('p');
-   // parTempInfo.textContent = cityTemperature;
-    //console.log("TempInfo2",parTempInfo.textContent);
+   
+    searchCityEl.append(cityValueFromButtonClick);
     searchCityTempEl.append("Temperature: " + cityTemperature);
     searchCityWindEl.append("Wind Speed: " + cityWind);
     searchCityHumidityEl.append("Humidity: " + cityHumidity);
 }
 
+
+function getAPI_5DayForecast(event){
+    requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=51.5085&lon=-0.1257&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
+
+    fetch(requestURL2)
+        .then(function(response){
+            if(response.status == 200){
+                console.log(response.status);
+            }else if(response.status >= 400){
+                console.log("Error, you received a: "+ response.status);
+            }
+            return response.json();
+        })
+        .then(function(data){
+          
+
+            for(let i = 0; i < data.list.length; i++)
+            {
+              
+                 
+                    var dateValue = data.list[i].dt_txt.split(' ')[0];
+                    var timeValue = data.list[i].dt_txt.split(' ')[1];
+         
+                    var hourValue = timeValue.split(':')[0];
+
+
+                    if(hourValue == '09')
+                    {
+                        console.log('hour value',hourValue + ' '+i);
+                        console.log('Temperature at 9am',data.list[i].main.temp);
+                        cityTemperature_5day = data.list[i].main.temp;
+                        cityWind_5day = data.list[i].wind.speed;
+                        cityHumidity_5day = data.list[i].main.humidity;
+                        console.log('Wind', cityWind_5day);
+                        console.log('Humidity', cityHumidity_5day);
+                    }
+            
+            }
+        
+
+        });
+}
+
+// just want to see the data - testng
+getAPI_5DayForecast();
+
+function displaySearchInfo2(event)
+{
+  
+    searchCityEl.append(cityValueFromButtonClick);
+
+    let cityTemperature_5day = '';
+    let cityWind_5day = '';
+    let cityHumidity_5day = '';
+
+    searchCityTempEl.append("Temperature: " + cityTemperature);
+    searchCityWindEl.append("Wind Speed: " + cityWind);
+    searchCityHumidityEl.append("Humidity: " + cityHumidity);
+}
 
