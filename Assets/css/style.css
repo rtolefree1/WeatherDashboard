@@ -12,9 +12,23 @@
 .btn-outline-success
 {
     margin-top: 5px;
-    width: 250px;
+    width: 100px;
 }
 
+.column
+{
+    height: 700px;
+}
+
+.firstColumn 
+{
+    width: 300px;
+}
+
+.firstColumn .navbar
+{
+    width: 300px;
+}
 
 
 .mr-sm-2
@@ -29,13 +43,14 @@
     
 }
 
-.col-4
+.searchCities
 {
     height: 700px;
+    width: 300px;
     background-color: lightblue;
 }
 
-.col-6
+#CityInfo
 {
     height: 200px;
     border: solid;
@@ -48,7 +63,25 @@
 .g-col-6
 {
     display: flex;
+    flex-direction: row;
 }
+
+section
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionCard1
+{
+    display: flex;
+}
+
+.sectionCard2
+{
+    display: flex;
+}
+
 
 #searchList_API
 {

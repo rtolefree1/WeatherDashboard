@@ -7,6 +7,12 @@ let searchCityTempEl = document.getElementById('displayCityTemp');
 let searchCityWindEl = document.getElementById('displayCityWind');
 let searchCityHumidityEl = document.getElementById('displayCityHumidity');
 
+///Need to display 
+let displayheaderEl = document.getElementById('CityInfo');
+//displayheaderEl.nextElementSibling.createElement('h3').textContent = '5-day Forcast';
+displayheaderEl.nextElementSibling.innerHTML= '<h3>5-day Forcast</h3>';
+
+
 // creating my array of cities
 let arrOfCities = [];// = ['Atlanta', 'Denver', 'Seattle', 'San Francisco', 'Orlando', 'New York', 'Chicago', 'Austin'];
 
@@ -94,10 +100,12 @@ function getAPI(cityValue){ // pass cityname value instead of event
         .then(function(response){
             if(response.status == 200){
                 console.log(response.status);
+                
                 if(!cityObj.includes(cityValue)){
                     cityObj.push(cityValue)
                     localStorage.setItem("Day-Weather", JSON.stringify(cityObj));
                     createCityButtons();
+                    
                 }
                 // localStorage.setItem("Day-Weather", JSON.stringify(cityObj));
                 // createCityButtons();
@@ -116,6 +124,11 @@ function getAPI(cityValue){ // pass cityname value instead of event
             //clearSearchInfo(event)
             displaySearchInfo(event);
             add_Attributes(event);
+            console.log("Longitude:", data.coord.lon);
+            console.log("Lattitude:", data.coord.lat);
+            longitude = data.coord.lon;
+            latitude = data.coord.lat;
+            getAPI_5DayForecast();
             // localStorage.setItem("Day-Weather", JSON.stringify(cityObj));
 
         });
@@ -132,12 +145,17 @@ function getAPI(cityValue){ // pass cityname value instead of event
 //search cities button; will store the "city" that user search for
 searchButtonEl.addEventListener("click", function(event){
     event.preventDefault();
-    console.log("Search for city");
-    cityValueFromButtonClick = formControlEl[0].value;
-    //localStorage.setItem("Day-Weather", JSON.stringify(cityObj));
-    //console.log("Search city value:",cityValueFromButtonClick);
-    getAPI(cityValueFromButtonClick)
+    // console.log("Search for city");
+    // cityValueFromButtonClick = formControlEl[0].value;
+    // console.log("Search city value:",cityValueFromButtonClick);
+    // getAPI(cityValueFromButtonClick)
     
+    
+    cityValueFromButtonClick = formControlEl[1].value;
+    console.log("Search city value:",cityValueFromButtonClick);
+    getAPI(cityValueFromButtonClick)
+
+
     //console.log("Search city value:",document.getElementsByClassName('form-control')[0].value)
 });
 
@@ -182,16 +200,20 @@ function clearSearchInfo(event)
     searchCityHumidityEl.innerHTML='';
 }
 
+
+
+
 //****************************************************************************************************************************** */
 //NOT USED YET****************************************************************************************************** */
 //****************************************************************************************************************************** */
 function getAPI_5DayForecast(event){
-    requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=51.5085&lon=-0.1257&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
+   // requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=51.5085&lon=-0.1257&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
+   requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+`${latitude}`+'&lon='+`${longitude}`+'&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
 
     fetch(requestURL2)
         .then(function(response){
             if(response.status == 200){
-                console.log(response.status);
+                console.log("5day forecat is good",response.status);
             }else if(response.status >= 400){
                 console.log("Error, you received a: "+ response.status);
             }
