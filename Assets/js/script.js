@@ -222,7 +222,7 @@ function clearSearchInfo(event)
 //****************************************************************************************************************************** */
 function getAPI_5DayForecast(event){
    // requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat=51.5085&lon=-0.1257&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
-   requestURL2 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+`${latitude}`+'&lon='+`${longitude}`+'&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
+   requestURL2 = 'https://api.openweathermap.org/data/2.5/forecast?lat='+`${latitude}`+'&lon='+`${longitude}`+'&appid=4b5773176d3e07e22f05a4f149585fee&units=imperial';
 
     fetch(requestURL2)
         .then(function(response){
