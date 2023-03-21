@@ -96,3 +96,10 @@ section
     background-color: lightgray;
     
 }
+
+.card-body
+{
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+}

@@ -7,14 +7,28 @@ let searchCityTempEl = document.getElementById('displayCityTemp');
 let searchCityWindEl = document.getElementById('displayCityWind');
 let searchCityHumidityEl = document.getElementById('displayCityHumidity');
 
+// let displayDate_5dayEl = document.getElementById('displayDate_5day');
+// let displayCityTemp_5dayEl = document.getElementById('displayCityTemp_5day');
+// let displayCityWind_5dayEl = document.getElementById('displayCityWind_5day');
+// let displayCityHumidity_5dayEl = document.getElementById('displayCityHumidity_5day');
+
+
+//let cardInfoEl = document.getElementById('city1');
+
 ///Need to display 
 let displayheaderEl = document.getElementById('CityInfo');
+let displayheader2El = document.getElementById('addingContent');
 //displayheaderEl.nextElementSibling.createElement('h3').textContent = '5-day Forcast';
-displayheaderEl.nextElementSibling.innerHTML= '<h3>5-day Forcast</h3>';
+displayheader2El.innerHTML= '<p style="font-size:160%;"><b>5-day Forcast<b></p>';
+// displayheader2El.createElement('p');
+// displayheader2El.innerHTML='5-day Forest';
+displayheader2El.setAttribute("style", "font-size:24");
+
+
 
 
 // creating my array of cities
-let arrOfCities = [];// = ['Atlanta', 'Denver', 'Seattle', 'San Francisco', 'Orlando', 'New York', 'Chicago', 'Austin'];
+let arrOfCities = [];
 
 // empty button
 let cityButton = '';
@@ -25,6 +39,7 @@ let cityTemperature = '';
 let cityWind = '';
 let cityHumidity = '';
 
+let cityDate_5day = '';
 let cityTemperature_5day = '';
 let cityWind_5day = '';
 let cityHumidity_5day = '';
@@ -32,14 +47,11 @@ let cityHumidity_5day = '';
 let longitude = '';
 let latitude = '';
 
+let update = 0;
+
 //Creating array of object(s) to store weather information to save in local storage
 // create object that local storage info or empty array
 let cityObj = JSON.parse(localStorage.getItem("Day-Weather")) || [];
-
-//calling the setting of local storage
-//setLocalStorage();
-
-//Display onpage load
 
 
 //run method to create buttons
@@ -179,6 +191,8 @@ function displaySearchInfo(event)
     
     console.log('city object', cityObj);
 
+    //cardInfoEl.append(cityValueFromButtonClick);
+
 }
 
 function setLocalStorage()
@@ -239,8 +253,26 @@ function getAPI_5DayForecast(event){
                         cityTemperature_5day = data.list[i].main.temp;
                         cityWind_5day = data.list[i].wind.speed;
                         cityHumidity_5day = data.list[i].main.humidity;
-                     //   console.log('Wind', cityWind_5day);
-                     //   console.log('Humidity', cityHumidity_5day);
+                        cityDate_5day = data.list[i].dt_txt.split(' ')[0]
+                        console.log('Date', cityDate_5day)
+                        console.log('Temp', cityTemperature_5day);
+                        console.log('Wind', cityWind_5day);
+                        console.log('Humidity', cityHumidity_5day);
+                        create2Cards();
+
+                        // let displayDate_5dayEl = document.getElementById('displayDate_5day'+`${i}`);
+                        // let displayCityTemp_5dayEl = document.getElementById('displayCityTemp_5day'+`${i}`);
+                        // let displayCityWind_5dayEl = document.getElementById('displayCityWind_5day'+`${i}`);
+                        // let displayCityHumidity_5dayEl = document.getElementById('displayCityHumidity_5day'+`${i}`);
+                    
+                        // // console.log('Temp', cityTemperature_5day);
+                        // // console.log('Wind', cityWind_5day);
+                        // // console.log('Humidity', cityHumidity_5day);
+                        // //displayDate_5dayEl.append();
+                        
+                        // displayCityTemp_5dayEl.append("Temperature: " + cityTemperature_5day);
+                        // displayCityWind_5dayEl.append("Wind Speed: " + cityWind_5day);
+                        // displayCityHumidity_5dayEl.append("Humidity: " + cityHumidity_5day);
                     }
             
             }
@@ -266,3 +298,28 @@ function displaySearchInfo2(event)
     searchCityHumidityEl.append("Humidity: " + cityHumidity);
 }
 
+function create2Cards(event)
+{
+    
+    // let displayDate_5dayEl = document.getElementById('displayDate_5day'+`${i}`);
+    // let displayCityTemp_5dayEl = document.getElementById('displayCityTemp_5day'+`${i}`);
+    // let displayCityWind_5dayEl = document.getElementById('displayCityWind_5day'+`${i}`);
+    // let displayCityHumidity_5dayEl = document.getElementById('displayCityHumidity_5day'+`${i}`);
+    let displayDate_5dayEl = document.getElementById('displayDate_5day'+update);
+    let displayCityTemp_5dayEl = document.getElementById('displayCityTemp_5day'+update);
+    let displayCityWind_5dayEl = document.getElementById('displayCityWind_5day'+update);
+    let displayCityHumidity_5dayEl = document.getElementById('displayCityHumidity_5day'+update);
+
+    // console.log('Temp', cityTemperature_5day);
+    // console.log('Wind', cityWind_5day);
+    // console.log('Humidity', cityHumidity_5day);
+    //displayDate_5dayEl.append();
+    //debugger
+    displayDate_5dayEl.append("Date: " + cityDate_5day);
+    displayCityTemp_5dayEl.append("Temperature: " + cityTemperature_5day);
+    displayCityWind_5dayEl.append("Wind Speed: " + cityWind_5day);
+    displayCityHumidity_5dayEl.append("Humidity: " + cityHumidity_5day);
+    update++;
+   
+
+}
